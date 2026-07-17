@@ -1,0 +1,31 @@
+AllInJane.CARD_NOBODY = Isaac.GetCardIdByName("Nobody")
+AllInJane.CARD_PARTY_TIME = Isaac.GetCardIdByName("Party Time")
+AllInJane.CARD_INFURIATING_NOTE = Isaac.GetCardIdByName("Infuriating Note")
+AllInJane.CARD_BEANSTALK = Isaac.GetCardIdByName("Beanstalk")
+AllInJane.CARD_JERKO = Isaac.GetCardIdByName("Jerko")
+AllInJane.CARD_NEGATIVE_NANCY = Isaac.GetCardIdByName("Negative Nancy")
+AllInJane.CARD_TALHAK = Isaac.GetCardIdByName("Talhak")
+AllInJane.CARD_YU_SZE = Isaac.GetCardIdByName("Yu Sze")
+
+
+
+AllInJane.SFX_BALANCE = Isaac.GetSoundIdByName("AIJ2 - Balance")
+AllInJane.SFX_CASH = Isaac.GetSoundIdByName("AIJ2 - Cash")
+AllInJane.SFX_FOIL = Isaac.GetSoundIdByName("AIJ2 - Foil")
+AllInJane.SFX_FORGE = Isaac.GetSoundIdByName("AIJ2 - Forge")
+AllInJane.SFX_JIMBO = Isaac.GetSoundIdByName("AIJ2 - Jimbo")
+AllInJane.SFX_JOKER = Isaac.GetSoundIdByName("AIJ2 - Joker")
+AllInJane.SFX_MULT = Isaac.GetSoundIdByName("AIJ2 - Mult")
+AllInJane.SFX_XMULT = Isaac.GetSoundIdByName("AIJ2 - XMult")
+AllInJane.SFX_POLYCHROME = Isaac.GetSoundIdByName("AIJ2 - Polychrome")
+
+local sfx = AllInJane.SFX
+sfx:Preload(AllInJane.SFX_BALANCE)
+sfx:Preload(AllInJane.SFX_CASH)
+sfx:Preload(AllInJane.SFX_FOIL)
+sfx:Preload(AllInJane.SFX_FORGE)
+sfx:Preload(AllInJane.SFX_JIMBO)
+sfx:Preload(AllInJane.SFX_JOKER)
+sfx:Preload(AllInJane.SFX_MULT)
+sfx:Preload(AllInJane.SFX_XMULT)
+sfx:Preload(AllInJane.SFX_POLYCHROME)

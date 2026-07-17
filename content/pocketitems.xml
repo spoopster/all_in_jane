@@ -1,0 +1,67 @@
+<pocketitems>
+<!-- CARDS -->
+    <card id="0" name="Nobody"
+        description=" "
+        hud="Nobody"
+        type="special"
+        pickup="976"
+
+        mimiccharge="1"
+    />
+    <card id="1" name="Party Time"
+        description=" "
+        hud="Party Time"
+        type="special"
+        pickup="976"
+
+        mimiccharge="1"
+    />
+    <card id="2" name="Infuriating Note"
+        description=" "
+        hud="Infuriating Note"
+        type="special"
+        pickup="976"
+
+        mimiccharge="1"
+    />
+    <card id="3" name="Beanstalk"
+        description=" "
+        hud="Beanstalk"
+        type="special"
+        pickup="976"
+
+        mimiccharge="1"
+    />
+    <card id="4" name="Jerko"
+        description=" "
+        hud="Jerko"
+        type="special"
+        pickup="976"
+
+        mimiccharge="1"
+    />
+    <card id="5" name="Negative Nancy"
+        description=" "
+        hud="Negative Nancy"
+        type="special"
+        pickup="976"
+
+        mimiccharge="1"
+    />
+    <card id="6" name="Talhak"
+        description=" "
+        hud="Talhak"
+        type="special"
+        pickup="976"
+
+        mimiccharge="1"
+    />
+    <card id="7" name="Yu Sze"
+        description=" "
+        hud="Yu Sze"
+        type="special"
+        pickup="976"
+
+        mimiccharge="1"
+    />
+</pocketitems>

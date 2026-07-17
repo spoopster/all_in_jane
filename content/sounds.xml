@@ -1,0 +1,29 @@
+<sounds root="sfx_allinjane/">
+	<sound name="AIJ2 - Balance">
+		<sample weight="1" path="balance.wav" />
+	</sound>
+	<sound name="AIJ2 - Cash">
+		<sample weight="1" path="cash.wav" />
+	</sound>
+	<sound name="AIJ2 - Foil">
+		<sample weight="1" path="foil.wav" />
+	</sound>
+	<sound name="AIJ2 - Forge">
+		<sample weight="1" path="hammer_forge.wav" />
+	</sound>
+	<sound name="AIJ2 - Jimbo">
+		<sample weight="1" path="jimbo_talk.wav" />
+	</sound>
+	<sound name="AIJ2 - Joker">
+		<sample weight="1" path="jokeradd.wav" />
+	</sound>
+	<sound name="AIJ2 - Mult">
+		<sample weight="1" path="mult.wav" />
+	</sound>
+	<sound name="AIJ2 - XMult">
+		<sample weight="1" path="xmult.wav" />
+	</sound>
+	<sound name="AIJ2 - Polychrome">
+		<sample weight="1" path="polychrome.wav" />
+	</sound>
+</sounds>

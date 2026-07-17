@@ -1,0 +1,7 @@
+<items gfxroot="gfx_allinjane/items/" version="1" deathanm2="gfx/death_items.anm2" >
+    <trinket id="0" name="Anarchy Tag"
+        description="TRUE CHAOS!"
+        gfx="anarchy_tag.png"
+        cache=""
+    />
+</items>
