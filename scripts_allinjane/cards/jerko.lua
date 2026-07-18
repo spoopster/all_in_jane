@@ -28,7 +28,6 @@ local function useCard(_, id, player, flags)
     player:AnimateCard(id, "UseItem")
 
     local numRetriggers = player:GetCardRNG(id):RandomInt(0, MAX_TRIGGERS)
-    numRetriggers = MAX_TRIGGERS
     if(numRetriggers>0) then
         local retriggersSoFar = 0
         local nextEffectFrame = TRIGGER_DELAY
