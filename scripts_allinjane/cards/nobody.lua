@@ -6,7 +6,7 @@ local NUM_CLEARS = 2
 local function useCard(_, id, player, flags)
     if(flags & UseFlag.USE_OWNED == 0) then
         local pos = AllInJane.GAME:GetRoom():FindFreePickupSpawnPosition(player.Position, 40)
-        local heart = Isaac.Spawn(5,PickupVariant.PICKUP_HEART,HeartSubType.HEART_BLACK,pos,Vector.Zero)
+        local heart = Isaac.Spawn(5,PickupVariant.PICKUP_HEART,HeartSubType.HEART_BLACK,pos,Vector.Zero,nil)
 
         return
     end
@@ -34,7 +34,7 @@ local function useCard(_, id, player, flags)
         AllInJane.SFX:Play(AllInJane.SFX_JOKER)
     else
         local pos = AllInJane.GAME:GetRoom():FindFreePickupSpawnPosition(player.Position, 40)
-        local heart = Isaac.Spawn(5,PickupVariant.PICKUP_HEART,HeartSubType.HEART_BLACK,pos,Vector.Zero)
+        local heart = Isaac.Spawn(5,PickupVariant.PICKUP_HEART,HeartSubType.HEART_BLACK,pos,Vector.Zero,nil)
     end
 
     AllInJane:playAnnouncerVoice(AllInJane.SFX_JIMBO, flags)
@@ -53,6 +53,8 @@ local function roomClear(_, player)
             end
         end
     end
+
+    Isaac.GetItemConfig():GetCard(AllInJane.CARD_NOBODY).ModdedCardFront.Color = Color.Default
 end
 AllInJane:AddCallback(ModCallbacks.MC_POST_PLAYER_NEW_LEVEL, roomClear)
 
@@ -71,7 +73,7 @@ HudHelper.RegisterHUDElement({
     Name = "CARD_NOBODY",
     Priority = HudHelper.Priority.HIGH,
     Condition = function (player)
-        return (player:GetCard(0)==AllInJane.CARD_NOBODY)
+        return (player:GetCard(0)==AllInJane.CARD_NOBODY and AllInJane:getCardData(player, 0)>=NUM_CLEARS)
     end,
 	OnRender = function(player, _, layout, position, alpha, scale)
         local conf = Isaac.GetItemConfig():GetCard(AllInJane.CARD_NOBODY)

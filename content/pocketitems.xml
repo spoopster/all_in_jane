@@ -1,67 +1,67 @@
 <pocketitems>
 <!-- CARDS -->
     <card id="0" name="Nobody"
-        description=" "
+        description="Does nothing...?"
         hud="Nobody"
         type="special"
         pickup="976"
 
-        mimiccharge="1"
+        mimiccharge="6"
     />
     <card id="1" name="Party Time"
-        description=" "
+        description="Shared suffering"
         hud="Party Time"
         type="special"
         pickup="976"
 
-        mimiccharge="1"
+        mimiccharge="12"
     />
     <card id="2" name="Infuriating Note"
-        description=" "
+        description="You've been had..."
         hud="Infuriating Note"
         type="special"
         pickup="976"
 
-        mimiccharge="1"
+        mimiccharge="2"
     />
     <card id="3" name="Beanstalk"
-        description=" "
+        description="Power to the people!"
         hud="Beanstalk"
         type="special"
         pickup="976"
 
-        mimiccharge="1"
+        mimiccharge="3"
     />
     <card id="4" name="Jerko"
-        description=" "
+        description="Takes his time"
         hud="Jerko"
         type="special"
         pickup="976"
 
-        mimiccharge="1"
+        mimiccharge="4"
     />
     <card id="5" name="Negative Nancy"
-        description=" "
+        description="Look to la luna"
         hud="Negative Nancy"
         type="special"
         pickup="976"
 
-        mimiccharge="1"
+        mimiccharge="12"
     />
     <card id="6" name="Talhak"
-        description=" "
+        description="Choose your future"
         hud="Talhak"
         type="special"
         pickup="976"
 
-        mimiccharge="1"
+        mimiccharge="4"
     />
     <card id="7" name="Yu Sze"
-        description=" "
+        description="Might of the meek"
         hud="Yu Sze"
         type="special"
         pickup="976"
 
-        mimiccharge="1"
+        mimiccharge="3"
     />
 </pocketitems>

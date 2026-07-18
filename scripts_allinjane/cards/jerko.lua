@@ -9,6 +9,8 @@ local DAMAGE_UP = 0.25
 local MAX_TRIGGERS = 10
 local TRIGGER_DELAY = 30
 
+local RETRIGGER_DELAY_DEC = 2
+
 ---@param player EntityPlayer
 local function jerkoEffect(player)
     local data = AllInJane:getData(player)
@@ -23,19 +25,33 @@ end
 ---@param flags UseFlag
 local function useCard(_, id, player, flags)
     jerkoEffect(player)
+    player:AnimateCard(id, "UseItem")
 
     local numRetriggers = player:GetCardRNG(id):RandomInt(0, MAX_TRIGGERS)
+    numRetriggers = MAX_TRIGGERS
     if(numRetriggers>0) then
+        local retriggersSoFar = 0
+        local nextEffectFrame = TRIGGER_DELAY
+        local maxEffectFrame = TRIGGER_DELAY*numRetriggers-(numRetriggers*(numRetriggers-1)/2)*RETRIGGER_DELAY_DEC
+
        Isaac.CreateTimer(
-            function()
-                if(player and player:Exists()) then
-                     jerkoEffect(player)
-                     sfx:Play(AllInJane.SFX_MULT)
-                     player:AnimateCard(id, "UseItem")
+            ---@param effect EntityEffect
+            function(effect)
+                if(effect.FrameCount==nextEffectFrame) then
+                    if(player and player:Exists()) then
+                        retriggersSoFar = retriggersSoFar+1
+
+                        jerkoEffect(player)
+                        sfx:Play(AllInJane.SFX_MULT,nil,nil,nil,1+retriggersSoFar*0.05)
+                        player:AnimateCard(id, "UseItem")
+
+                        nextEffectFrame = nextEffectFrame+TRIGGER_DELAY-retriggersSoFar*RETRIGGER_DELAY_DEC
+                    end
                 end
             end,
-            TRIGGER_DELAY,
-            numRetriggers
+            1,
+            maxEffectFrame,
+            false
        )
     end
 

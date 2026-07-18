@@ -7,7 +7,7 @@ AllInJane.CARD_NEGATIVE_NANCY = Isaac.GetCardIdByName("Negative Nancy")
 AllInJane.CARD_TALHAK = Isaac.GetCardIdByName("Talhak")
 AllInJane.CARD_YU_SZE = Isaac.GetCardIdByName("Yu Sze")
 
-
+AllInJane.TRINKET_ANARCHY_TAG = Isaac.GetTrinketIdByName("Anarchy Tag")
 
 AllInJane.SFX_BALANCE = Isaac.GetSoundIdByName("AIJ2 - Balance")
 AllInJane.SFX_CASH = Isaac.GetSoundIdByName("AIJ2 - Cash")

@@ -10,74 +10,64 @@ local cardDescs = {
             "!!! Destroys itself when dropped"
         }
     },
-    --[[] ]
-    [AllInJane.CARD_LITTLE_BOY_BLUE] = {
-        Name = "Little Boy Blue",
+    [AllInJane.CARD_PARTY_TIME] = {
+        Name = "Party Time",
         Desc = {
-            "Rerolls all items in the room into \"Tears Up\" items",
-            "{{Collectible323}} Triggers Isaac's Tears"
+            "{{Timer}} For the next 20 seconds, killing an enemy permanently grants \1 +0.03 Fire rate",
         }
     },
-    [AllInJane.CARD_HAT_TRICK] = {
-        Name = "Hat Trick",
+    [AllInJane.CARD_JERKO] = {
+        Name = "Jerko",
         Desc = {
-            "For the rest of the floor, every 3rd hit taken deals no damage and counts as self-damage",
+            "\1 +0.25 flat Damage for the room",
+            "Triggers on-hit effects",
+            "On use, retriggers its effect 0-10 additional times"
         }
     },
-    [AllInJane.CARD_COMEDIANS_MANIFESTO] = {
-        Name = "Comedian's Manifesto",
+    [AllInJane.CARD_BEANSTALK] = {
+        Name = "Beanstalk",
         Desc = {
-            "{{Card21}} For the rest of the floor, all consumables are turned into XX - Judgement",
+            "{{Beggar}} For the rest of the room, beggars pay out twice as often and pay out three times in a row",
+            "Additional uses in the same room spawn a beggar",
         }
     },
-    [AllInJane.CARD_LEXICON] = {
-        Name = "Lexicon",
+    [AllInJane.CARD_NEGATIVE_NANCY] = {
+        Name = "Negative Nancy",
         Desc = {
-            "\1 Grants +0.01 flat Damage per letter in the names of all held items",
-            "Rarer letters grant more damage",
-            "{{Timer}} Damage only lasts for the current room"
+            "{{Planetarium}} +9% Planetarium chance",
         }
     },
-    [AllInJane.CARD_GNASHER] = {
-        Name = "Gnasher",
+    [AllInJane.CARD_INFURIATING_NOTE] = {
+        Name = "Infuriating Note",
         Desc = {
-            "Spawns 2 copies of a random consumable in the room",
+            "Does nothing on use",
+            "While held:",
+            "\1 +2 flat Damage",
+            "\2 All random pickup spawns are replaced with Infuriating Note"
         }
     },
-    [AllInJane.CARD_SILVIO] = {
-        Name = "Silvio",
+    [AllInJane.CARD_YU_SZE] = {
+        Name = "Yu Sze",
         Desc = {
-            "Grants a passive item for every charge on your active item",
-            "The items granted only last for the current room"
+            "{{BossRoom}} For the current room, doubles the effects of all Boss Room items you have",
         }
     },
-    [AllInJane.CARD_EULENSPIEGEL] = {
-        Name = "Eulenspiegel",
+    [AllInJane.CARD_TALHAK] = {
+        Name = "Talhak",
         Desc = {
-            "{{Collectible127}} Rerolls and restarts the current floor",
+            "{{BossRoom}} The next time you clear a boss room, spawns 10 different cards/pills, you can only pick 1",
+            "Additional uses spawn 1 additional card/pill"
         }
     },
-    [AllInJane.CARD_COCONUT] = {
-        Name = "Coconut",
-        Desc = {
-            "Grants {{Collectible139}} 1 trinket slot and {{Collectible454}} 1 consumable slot for the current floor",
-        }
-    },
-    --]]
 }
 
-local itemDescs = {
-    --[[] ]
-    [AllInJane.COLLECTIBLE_DOUBLE_SIDED_CARD] = {
-        Name = "Double-Sided Card",
+local trinketDescs = {
+    [AllInJane.TRINKET_ANARCHY_TAG] = {
+        Name = "Anarchy Tag",
         Desc = {
-            "{{CardbackFlipFlopRed}} When used at full charge, spawns a random flip-flop card",
-            "When used at partial charge, consumes 1 pip and morphs held cards:",
-            "{{CardbackFlipFlopRed}} Regular <-> flipped flip-flop cards",
-            "{{Card}} Regular <-> reverse tarot cards"
-        }
+            "Upon using a consumable, grants 1 completely random item effect for the room and spawns 1 random pickup",
+        },
     }
-    --]]
 }
 
 local iconSprite = Sprite("gfx_allinjane/ui/ui_eid_cards.anm2", true)
@@ -106,58 +96,15 @@ for id, table in pairs(cardDescs) do
     EID:addCard(id, turnStringTableToDesc(table.Desc), table.Name, "en_us")
 end
 
-for id, table in pairs(itemDescs) do
-    EID:addCollectible(id, turnStringTableToDesc(table.Desc), table.Name, "en_us")
+for id, table in pairs(trinketDescs) do
+    EID:addTrinket(id, turnStringTableToDesc(table.Desc), table.Name, "en_us")
 end
 
---[[] ]
-local cardVarDataModifiers = {
-    [AllInJane.CARD_REPORT] = function(val)
-        return "{{ColorSilver}}"..tostring(val).." room"..(val==1 and "" or "s").." cleared{{CR}}"
-    end,
-    [AllInJane.CARD_SCRATCH] = function(val)
-        local str = "{{ColorSilver}}"
-
-        for i=0, 2 do
-            local outcome = (val>>(i*AllInJane.OUTCOME_BIT_BLOCK_SIZE)) & (2^AllInJane.OUTCOME_BIT_BLOCK_SIZE-1)
-            str = str..(i>0 and ", " or "")..(scratchOutcomes[outcome] or scratchOutcomes[0])
-        end
-
-        return str.."{{CR}}"
-    end,
+EID.descriptions["en_us"].goldenTrinketData[AllInJane.TRINKET_ANARCHY_TAG] = {
+    t = {1},
+    findReplace = true,
+    fullReplace = true,
 }
-
-for id, result in pairs(cardVarDataModifiers) do
-    EID:addDescriptionModifier(
-        "CardJamFlipCardModifier"..tostring(id),
-        function(descObj)
-            if(descObj.ObjType==5 and descObj.ObjVariant==300 and descObj.ObjSubType==id) then
-                return true
-            end
-            return false
-        end,
-        function(descObj, player)
-            player = player or Isaac.GetPlayer()
-
-            local val = 0
-            if(descObj.Entity) then
-                local pickup = descObj.Entity:ToPickup()
-                if(pickup) then
-                    val = pickup:GetVarData()
-                end
-            elseif(player) then
-                for i=0,3 do
-                    if(player:GetCard(i)==descObj.ObjSubType) then
-                        val = AllInJane:getCardData(player, i)
-                        break
-                    end
-                end
-            end
-
-            local str = result(val)
-            descObj.Description = descObj.Description.."#"..str
-            return descObj
-        end
-    )
-end
---]]
+EID.descriptions["en_us"].goldenTrinketEffects[AllInJane.TRINKET_ANARCHY_TAG] = {
+    "Upon using a consumable, grants {{ColorGold}}2{{CR}} completely random item effects for the room and spawns {{ColorGold}}2{{CR}} random pickups", "Upon using a consumable, grants {{ColorRainbow}}3{{CR}} completely random item effects for the room and spawns {{ColorRainbow}}3{{CR}} random pickups"
+}
